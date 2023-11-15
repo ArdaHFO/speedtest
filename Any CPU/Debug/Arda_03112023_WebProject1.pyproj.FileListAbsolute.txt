@@ -1,2 +1,0 @@
-C:\Users\ardah\source\repos\Arda_031120223_WebProject1\obj\Any CPU\Debug\Arda_03112023_WebProject1.pyproj.CoreCompileInputs.cache
-C:\Users\ardah\OneDrive\Masaüstü\Mehmet_Project_Codes\SpeedTest\SpeedTest-Arda-04\obj\Any CPU\Debug\Arda_03112023_WebProject1.pyproj.CoreCompileInputs.cache
