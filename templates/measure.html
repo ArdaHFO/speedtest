@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+ <title>Speed test result</title>
+</head>
+<body>
+ <p style="font-family: 'Arial', monospace; font-size: 20px; font-weight: bold; color: royalblue">Speed test result</p>
+ <hr>
+ <p><b>Download data size:</b> {{ download_datasize }} </p>
+ <p><b>Download time:</b> {{ download_datatime }} </p>
+ <p><b>Download speed:</b> {{ download_speed }} Mbps</p>
+ <hr>
+ <p><b>Upload data Size:</b> {{ upload_datasize }} </p>
+ <p><b>Upload time:</b> {{ upload_datatime }} </p>
+ <p><b>Upload speed:</b> {{ upload_speed }} Mbps</p>
+ <hr>
+ <p><b>Command:</b> {{ ping_Command }} ms</p>
+ <p><b>Result:</b> {{ ping_result }} ms</p>
+ <hr>
+ <p style="font-family: 'Arial', monospace; font-size: 20px; font-weight: bold; color: royalblue">Speed ​test result uses Speedtest component</p>
+<p><b>Download speed:</b> {{ download_speedtest }} Mbps</p>
+ <p><b>Upload speed:</b> {{ upload_speedtest }} Mbps</p>
+ <p><b>Country:</b> {{ country_speedtest }}</p>
+ <p><b>Name:</b> {{ name_speedtest }}</p>
+ <p><b>Sponsor:</b> {{ sponsor_speedtest }}</p>
+ <p><b>Host:</b> {{ host_speedtest }}</p>
+ <hr>
+ <a href="/">Back to Home</a>
+ </body>
+</html>

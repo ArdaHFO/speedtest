@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Speed Test</title>
+ <style>
+  input[type=submit] {
+   border: 1px solid #ccc;
+   display: inline-block;
+   background-color: royalblue;
+   border: none;
+   color: white;
+   padding: 16px 32px;
+   text-decoration: none;
+   margin: 4px 2px;
+   cursor: pointer;
+   border-radius: 10px;
+   width:240px;
+  }
+  input[type="file"] {
+   display: none;
+  }
+  .custom-file-upload {
+   border: 1px solid #ccc;
+   display: inline-block;
+   background-color: royalblue;
+   border: none;
+   color: white;
+   padding: 16px 32px;
+   text-decoration: none;
+   margin: 4px 2px;
+   cursor: pointer;
+   border-radius: 10px;
+   width: 180px;
+  }
+ </style>
+</head>
+<body>
+ <!-- ******************************************************************** -->
+ <hr>
+ <p style="font-family: 'Arial', monospace; font-size: 28px; font-weight: bold; text-decoration: underline; color: royalblue">Speed Test</p>
+ <hr>
+ <!-- ******************************************************************** -->
+ <!-- <p style="font-family: 'Arial', monospace; font-size: 20px; font-weight: bold; color: royalblue">Measuring Download Speed</p> -->
+ <button onclick="measureDownloadSpeed()" style="background-color: royalblue; border: none; color: white; padding: 16px 32px; text-decoration: none; margin: 4px 2px; cursor: pointer; border-radius: 10px; width: 240px;">Measure Download Speed</button>
+ <script>
+  function measureDownloadSpeed() {
+   var startTime, endTime;
+   var downloadSizeInBytes = 1024 * 1024; // 1 MB dosya
+   //var downloadUrl = "https://example.com/path/to/large-file.zip"; // İndirilecek dosyanın URL'si
+   var downloadUrl = "https://3.66.29.68/20MB.png";
+   var xhr = new XMLHttpRequest();
+   xhr.open('GET', downloadUrl, true);
+
+   xhr.onreadystatechange = function () {
+    if (xhr.readyState === 2) {
+     startTime = new Date().getTime();
+    } else if (xhr.readyState === 4) {
+     endTime = new Date().getTime();
+     var durationInSeconds = (endTime - startTime) / 1000;
+     var downloadSpeedMbps = (downloadSizeInBytes / (1024 * 1024)) / durationInSeconds;
+
+     alert("Download Speed: " + downloadSpeedMbps.toFixed(2) + " Mbps");
+    }
+   };
+
+   xhr.send();
+  }
+ </script>
+ <!-- ******************************************************************** -->
+ <!-- <p style="font-family: 'Arial', monospace; font-size: 20px; font-weight: bold; color: royalblue">Measuring Upload Speed</p> -->
+ <p></p>
+ <label class="custom-file-upload">
+  Measuring Upload Speed
+  <input type="file" id="fileInput" onchange="measureUploadSpeed()" style="background-color: royalblue; border: none; color: white; padding: 16px 32px; text-decoration: none; margin: 4px 2px; cursor: pointer; border-radius: 10px;">
+ </label>
+ <div id="uploadResult"></div>
+
+ <script>
+  function measureUploadSpeed() {
+   var startTime = new Date().getTime();
+   var fileInput = document.getElementById("fileInput");
+   var file = fileInput.files[0];
+
+   var formData = new FormData();
+   formData.append("file", file);
+
+   var xhr = new XMLHttpRequest();
+   xhr.open("POST", "/upload", true);
+
+   xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+     var endTime = new Date().getTime();
+     var duration = endTime - startTime;
+     var uploadSpeedMbps = (file.size / (1024 * 1024)) / (duration / 1000);
+     document.getElementById("uploadResult").innerHTML = "Upload Speed : " + uploadSpeedMbps.toFixed(2) + " Mbps";
+    }
+   };
+
+   xhr.send(formData);
+  }
+ </script>
+ <!-- ******************************************************************** -->
+ <!-- <p style="font-family: 'Arial', monospace; font-size: 20px; font-weight: bold; color: royalblue">Ping Speed</p> -->
+ <p></p>
+ <button onclick="pingServer();" style="background-color: royalblue; border: none; color: white; padding: 16px 32px; text-decoration: none; margin: 4px 2px; cursor: pointer; border-radius: 10px; width: 240px;">Ping to the Server</button>
+ <div style="height:20px;" id="pingResult"></div>
+ <script>
+  function pingServer() {
+   var startTime = new Date().getTime();
+   var xhr = new XMLHttpRequest();
+   xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+     var endTime = new Date().getTime();
+     var duration = endTime - startTime;
+     document.getElementById("pingResult").innerHTML = "Ping Speed : " + duration + " ms";
+    }
+   };
+   xhr.open("GET", "/ping", true);
+   xhr.send();
+  }
+ </script>
+ <!-- ******************************************************************** -->
+ <hr>
+ <button onclick="location.reload();" style="background-color: royalblue; border: none; color: white; padding: 16px 32px; text-decoration: none; margin: 4px 2px; cursor: pointer; border-radius: 10px; width: 240px;">Page refresh</button>
+ <form method="post" action="/measure">
+  <!-- <input type="submit" name="button1" value="Measure Speed"> -->
+ </form>
+ <hr>
+ <!-- ******************************************************************** -->
+</body>
+</html>
